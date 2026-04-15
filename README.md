@@ -9,7 +9,7 @@ Desarrollado con **React + Vite**, enfocado en una experiencia de usuario fluida
 - **Notificaciones en Tiempo Real**: Integración dual con **Socket.io** y **SSE**.
 - **Consumo Híbrido de API**: Conexión optimizada vía **REST** y **GraphQL**.
 - **Animaciones Premium**: Transiciones de página y efectos visuales avanzados (Vara, Swiper).
-- **Widgets Dinámicos**: Información meteorológica y noticias en vivo.
+- **Widgets Dinámicos**: Información meteorológica en tiempo real.
 
 ## 🚀 Inicio Rápido
 
