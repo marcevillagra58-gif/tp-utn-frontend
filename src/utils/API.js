@@ -13,9 +13,35 @@ export const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || "http://localhost:3000/api";
 
 /**
- * Wrapper de fetch para incluir headers de seguridad y manejar errores globales.
+ * Intenta renovar el accessToken usando el refreshToken guardado.
+ * @returns {string|null} Nuevo accessToken, o null si falló.
  */
-export const apiFetch = async (endpoint, options = {}) => {
+const refreshAccessToken = async () => {
+  const refreshToken = localStorage.getItem("refreshToken");
+  if (!refreshToken) return null;
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/auth/refresh`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ refreshToken }),
+    });
+
+    if (!response.ok) return null;
+
+    const data = await response.json();
+    localStorage.setItem("accessToken", data.accessToken);
+    return data.accessToken;
+  } catch {
+    return null;
+  }
+};
+
+/**
+ * Wrapper de fetch para incluir headers de seguridad y manejar errores globales.
+ * Implementa refresco automático de token cuando el accessToken vence (401).
+ */
+export const apiFetch = async (endpoint, options = {}, _isRetry = false) => {
   const token = localStorage.getItem("accessToken");
 
   const headers = {
@@ -33,14 +59,24 @@ export const apiFetch = async (endpoint, options = {}) => {
     credentials: "include",
   });
 
-  // Manejo de errores de autenticación (Token expirado)
-  if (response.status === 401) {
-    // Aquí se podría implementar la lógica de refresco automático con el refreshToken
-    console.warn("Sesión expirada o token inválido");
+  // Si el token venció y aún no reintentamos → refrescamos y volvemos a intentar
+  if (response.status === 401 && !_isRetry) {
+    const newToken = await refreshAccessToken();
+    if (newToken) {
+      // Reintento único con el nuevo token
+      return apiFetch(endpoint, options, true);
+    }
+    // Si no se pudo renovar, limpiamos la sesión
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("user");
+    // Recargamos para que el AuthContext detecte la sesión vacía
+    window.location.reload();
   }
 
   return response;
 };
+
 
 /**
  * Función para subir imágenes al Backend propio (que luego sube a Cloudinary)
