@@ -29,7 +29,7 @@
 
 .weather-wrapper .weather-widget {
     width: 220px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(10, 20, 40, 0.75);
     border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
@@ -48,7 +48,7 @@
 /* ── Estilos del widget de emergencias ── */
 .emergency-widget {
     width: 220px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(10, 20, 40, 0.75);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.25);
