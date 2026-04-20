@@ -22,7 +22,7 @@
 /* ── WeatherWidget fijo en la esquina superior derecha ── */
 .weather-wrapper {
     position: fixed;
-    top: 70px;
+    top: 170px;
     right: 20px;
     z-index: 90;
 }
@@ -36,7 +36,7 @@
 /* ── EmergencyWidget fijo en la esquina superior izquierda ── */
 .emergency-wrapper {
     position: fixed;
-    top: 70px;
+    top: 170px;
     left: 20px;
     z-index: 90;
 }
