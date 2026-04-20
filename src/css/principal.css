@@ -22,21 +22,25 @@
 /* ── WeatherWidget fijo en la esquina superior derecha ── */
 .weather-wrapper {
     position: fixed;
-    top: 170px;
+    top: 250px;
     right: 20px;
     z-index: 90;
 }
 
 .weather-wrapper .weather-widget {
     width: 220px;
-    background: rgba(10, 20, 40, 0.75);
+    background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.weather-wrapper .weather-widget:hover {
+    background: rgba(255, 255, 255, 0.15);
 }
 
 /* ── EmergencyWidget fijo en la esquina superior izquierda ── */
 .emergency-wrapper {
     position: fixed;
-    top: 170px;
+    top: 250px;
     left: 20px;
     z-index: 90;
 }
@@ -44,7 +48,7 @@
 /* ── Estilos del widget de emergencias ── */
 .emergency-widget {
     width: 220px;
-    background: rgba(10, 20, 40, 0.75);
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.25);
@@ -61,7 +65,7 @@
 .emergency-widget:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-    background: rgba(10, 20, 40, 0.85);
+    background: rgba(255, 255, 255, 0.15);
 }
 
 .emergency-header {
